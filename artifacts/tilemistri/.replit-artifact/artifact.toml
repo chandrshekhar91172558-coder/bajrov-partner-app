@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "TileMistri Partner"
+version = "1.0.0"
+id = "artifacts/tilemistri"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22920
+
+[services.development]
+run = "pnpm --filter @workspace/tilemistri run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/tilemistri", "run", "build" ]
+publicDir = "artifacts/tilemistri/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22920"
+BASE_PATH = "/"
